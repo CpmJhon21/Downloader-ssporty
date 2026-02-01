@@ -18,6 +18,10 @@
     --border-color: #e0e0e0;
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+    --success-color: #2ecc71;
+    --error-color: #e74c3c;
+    --warning-color: #f39c12;
+    --info-color: #3498db;
 }
 
 body.dark-mode {
@@ -127,6 +131,15 @@ nav {
     color: var(--text-color);
     font-size: 24px;
     cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu-btn:hover {
+    background-color: var(--bg-light);
 }
 
 /* Hero Section */
@@ -157,6 +170,44 @@ nav {
     margin: 0 auto 30px;
 }
 
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    background-color: var(--bg-light);
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 140px;
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.tab-btn:hover:not(.active) {
+    background-color: var(--border-color);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
 .input-group {
     display: flex;
     gap: 10px;
@@ -182,7 +233,7 @@ nav {
     border-color: var(--primary-color);
 }
 
-.paste-btn, .download-btn {
+.paste-btn, .download-btn, .search-btn {
     padding: 18px 30px;
     border: none;
     border-radius: 50px;
@@ -194,6 +245,7 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    min-width: 120px;
 }
 
 .paste-btn {
@@ -205,13 +257,49 @@ nav {
     background-color: var(--border-color);
 }
 
-.download-btn {
+.download-btn, .search-btn {
     background-color: var(--primary-color);
     color: white;
 }
 
-.download-btn:hover {
+.download-btn:hover, .search-btn:hover {
     background-color: var(--primary-dark);
+}
+
+/* URL Examples */
+.url-examples, .search-examples {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.url-examples p, .search-examples p {
+    color: var(--text-light);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.example-links, .example-search {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.example-link, .search-example {
+    padding: 8px 15px;
+    background-color: var(--bg-light);
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.example-link:hover, .search-example:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
 }
 
 .search-note {
@@ -221,6 +309,10 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: var(--bg-light);
+    border-radius: 10px;
 }
 
 .alert {
@@ -264,10 +356,300 @@ nav {
     gap: 8px;
     max-width: 600px;
     margin: 0 auto;
+    padding: 12px;
+    background-color: var(--bg-light);
+    border-radius: 10px;
 }
 
 .support-notice i {
     color: #e74c3c;
+}
+
+/* Results Section */
+.results-section {
+    margin-top: 40px;
+    display: none;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.results-section.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.results-section h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--text-color);
+    font-size: 24px;
+}
+
+.results-container {
+    width: 100%;
+}
+
+.result-item {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.result-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .result-item:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.result-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-info {
+    flex: 1;
+}
+
+.result-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.result-artist {
+    color: var(--text-light);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.result-duration {
+    color: var(--text-light);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.result-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-play, .btn-download {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 100px;
+}
+
+.btn-play {
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-play:hover {
+    background-color: var(--border-color);
+}
+
+.btn-download {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-download:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 40px;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--bg-light);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-light);
+}
+
+.no-results i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: var(--border-color);
+}
+
+/* Download Options */
+.download-options {
+    background-color: var(--bg-light);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.quality-options {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.quality-option {
+    flex: 1;
+    min-width: 120px;
+}
+
+.quality-option input[type="radio"] {
+    display: none;
+}
+
+.quality-option label {
+    display: block;
+    padding: 12px 15px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    color: var(--text-color);
+}
+
+.quality-option input[type="radio"]:checked + label {
+    border-color: var(--primary-color);
+    background-color: rgba(29, 185, 84, 0.1);
+    color: var(--primary-color);
+}
+
+.download-action {
+    text-align: center;
+}
+
+.btn-download-file {
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-download-file:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Playlist Results */
+.playlist-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: var(--bg-light);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.playlist-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.playlist-details h4 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.playlist-details p {
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.btn-download-all {
+    padding: 10px 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.btn-download-all:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Search Info */
+.search-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--bg-light);
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.search-info h4 {
+    color: var(--text-color);
+    font-size: 18px;
 }
 
 /* Sections Common Styles */
@@ -351,6 +733,7 @@ section {
     padding: 30px;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    border: 1px solid var(--border-color);
 }
 
 .feature-card:hover {
@@ -402,6 +785,7 @@ section {
     border-radius: 15px;
     padding: 30px;
     box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
 .benefit h3 {
@@ -497,6 +881,7 @@ section {
     box-shadow: var(--shadow);
     max-width: 800px;
     margin: 0 auto;
+    border: 1px solid var(--border-color);
 }
 
 .last-updated h3 {
@@ -617,6 +1002,16 @@ footer {
     color: var(--text-color);
     font-size: 24px;
     cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-mobile-menu:hover {
+    background-color: var(--bg-light);
 }
 
 .mobile-menu-link {
@@ -717,6 +1112,18 @@ input:checked + .slider:before {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .modal-header {
@@ -738,6 +1145,16 @@ input:checked + .slider:before {
     color: white;
     font-size: 22px;
     cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .modal-body {
@@ -755,7 +1172,7 @@ input:checked + .slider:before {
 
 .progress-bar {
     height: 100%;
-    background-color: var(--primary-color);
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
     width: 0%;
     transition: width 0.3s ease;
     border-radius: 15px;
@@ -784,6 +1201,18 @@ input:checked + .slider:before {
     font-size: 14px;
 }
 
+.download-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--bg-light);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-light);
+}
+
 .modal-footer {
     padding: 20px 25px;
     background-color: var(--bg-light);
@@ -793,7 +1222,7 @@ input:checked + .slider:before {
 
 .btn-cancel {
     padding: 10px 25px;
-    background-color: #e74c3c;
+    background-color: var(--error-color);
     color: white;
     border: none;
     border-radius: 5px;
@@ -804,6 +1233,61 @@ input:checked + .slider:before {
 
 .btn-cancel:hover {
     background-color: #c0392b;
+}
+
+/* Contact Form */
+.contact-form {
+    padding: 10px 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.submit-btn:hover {
+    background-color: var(--primary-dark);
 }
 
 /* Responsive Styles */
@@ -819,6 +1303,20 @@ input:checked + .slider:before {
     .features-grid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
+    
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .input-group input {
+        min-width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .paste-btn, .download-btn, .search-btn {
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -827,7 +1325,7 @@ input:checked + .slider:before {
     }
     
     .mobile-menu-btn {
-        display: block;
+        display: flex;
     }
     
     .hero h1 {
@@ -836,21 +1334,6 @@ input:checked + .slider:before {
     
     .hero h2 {
         font-size: 18px;
-    }
-    
-    .input-group {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .input-group input {
-        min-width: 100%;
-        margin-bottom: 10px;
-    }
-    
-    .paste-btn, .download-btn {
-        width: 100%;
-        max-width: 300px;
     }
     
     .section-title {
@@ -863,6 +1346,36 @@ input:checked + .slider:before {
     
     .features-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .result-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .result-actions {
+        width: 100%;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .btn-play, .btn-download {
+        width: 100%;
+    }
+    
+    .playlist-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .quality-options {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        min-width: 120px;
+        padding: 10px 20px;
     }
 }
 
@@ -887,5 +1400,15 @@ input:checked + .slider:before {
     .footer-links {
         flex-direction: column;
         gap: 15px;
+    }
+    
+    .tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tab-btn {
+        width: 100%;
+        max-width: 250px;
     }
 }
